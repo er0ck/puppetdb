@@ -40,7 +40,7 @@ test_name "Install packages and repositories on target machines..." do
       case host['platform']
       when /(el-|fedora)/
         on host, "yum install -y git-core ruby rubygem-rake"
-      when /debian/
+      when /(debian|ubuntu)/
         on host, "apt-get install -y git-core ruby rake"
       else
         raise "OS #{host['platform']} not supported"

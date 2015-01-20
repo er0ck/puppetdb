@@ -42,7 +42,7 @@ deb http://s3-us-west-2.amazonaws.com/puppetdb-jdk/jpkg/ pljdk main
         which_result = on database, "which lein", :acceptable_exit_codes => [0,1]
         needs_lein = which_result.exit_code == 1
         if (needs_lein)
-          on database, "curl --tlsv1 -k https://raw.githubusercontent.com/technomancy/leiningen/2.3.4/bin/lein -o /usr/local/bin/lein"
+          on database, "curl --tlsv1 -k https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein -o /usr/local/bin/lein"
           on database, "chmod +x /usr/local/bin/lein"
           on database, "LEIN_ROOT=true lein"
         end
@@ -75,6 +75,10 @@ deb http://s3-us-west-2.amazonaws.com/puppetdb-jdk/jpkg/ pljdk main
       when /^ubuntu-10.04/
         # Ubuntu 10.04 has rubygems 1.3.5 which is known to not be reliable, so therefore
         # we skip.
+      when /^ubuntu-(14|trust)/
+        on master, "apt-get install -y rubygems-integration ruby-dev libsqlite3-dev"
+        on master, "gem install activerecord -v 3.2.17 --no-ri --no-rdoc -V --backtrace"
+        on master, "gem install sqlite3 -v 1.3.9 --no-ri --no-rdoc -V --backtrace"
       else
         on master, "apt-get install -y rubygems ruby-dev libsqlite3-dev"
         on master, "gem install activerecord -v 3.2.17 --no-ri --no-rdoc -V --backtrace"
