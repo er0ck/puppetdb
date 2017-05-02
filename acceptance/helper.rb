@@ -446,7 +446,8 @@ module PuppetDBExtensions
 
     step "Configure database.ini file" do
       manifest = "
-        class { 'puppetdb::server::database_ini': }"
+        class { 'puppetdb::server::database': }
+        class { 'puppetdb::server::jetty': }"
 
       apply_manifest_on(host, manifest)
     end
