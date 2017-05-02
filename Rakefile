@@ -10,7 +10,7 @@ def run_beaker(test_files)
   color = ENV["BEAKER_COLOR"] == "false" ? false : true
   xml = ENV["BEAKER_XML"] == "true" ? true : false
   type = ENV["BEAKER_TYPE"] || "aio"
-  keyfile = ENV["BEAKER_KEYFILE"] || nil
+  keyfile = ENV["BEAKER_KEYFILE"] || "#{ENV['HOME']}/.ssh/id_rsa-acceptance"
   collect_perf_data = ENV["BEAKER_COLLECT_PERF_DATA"] || nil
 
   beaker = "bundle exec beaker " +
