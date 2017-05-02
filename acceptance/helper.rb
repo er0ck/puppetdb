@@ -441,6 +441,7 @@ module PuppetDBExtensions
     # Uncomment for pinning against a particular ezbake revision
     #ezbake_dev_build("git@github.com:kbarber/ezbake.git", "pdb-1455")
 
+    ENV['GIT_TEMPLATE_DIR'] = '/dev/null'
     install_from_ezbake host
 
     step "Configure database.ini file" do
